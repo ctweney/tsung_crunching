@@ -1,0 +1,62 @@
+<html>
+<head>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+  <script type="text/javascript" src="tsung_test_data.js"></script>
+  <script type="text/javascript">
+    google.load("visualization", "1", {packages: ["corechart"]});
+    google.setOnLoadCallback(drawAllCharts);
+
+    function drawAllCharts() {
+      drawCPU();
+      drawMemory();
+    }
+
+    function drawCPU() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Run #');
+      data.addColumn('number', 'CPU %');
+      data.addColumn({type:'string', role:'tooltip'});
+      data.addRows(tsung_test_data['highest_cpu']);
+
+      var options = {
+        title: 'Test run vs. Highest CPU',
+        hAxis: {title: 'Test Run'},
+        vAxis: {title: 'Highest CPU %'},
+        legend: 'none'
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('cpu_chart_div'));
+
+      chart.draw(data, options);
+    }
+
+
+    function drawMemory() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('number', 'Run #');
+      data.addColumn('number', 'Lowest Available Memory (MB)');
+      data.addColumn({type:'string', role:'tooltip'});
+      data.addRows(tsung_test_data['lowest_memory']);
+
+      var options = {
+        title: 'Test run vs. Lowest Available Memory (MB)',
+        hAxis: {title: 'Test Run'},
+        vAxis: {title: 'Lowest Available Memory (MB)'},
+        legend: 'none'
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('memory_chart_div'));
+
+      chart.draw(data, options);
+    }
+  </script>
+</head>
+<body>
+
+<div id="cpu_chart_div" style="width: 900px; height: 500px;"></div>
+
+<div id="memory_chart_div" style="width: 900px; height: 500px;"></div>
+
+</body>
+</html>
