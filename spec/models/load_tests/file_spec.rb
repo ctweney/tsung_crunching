@@ -2,7 +2,7 @@ require 'application'
 
 describe LoadTests::File do
 
-  subject { LoadTests::File.new(File.join(Application.root, 'fixtures', 'tsung', 'tsung.log')).process }
+  subject { LoadTests::File.new(File.join(Application.root, 'fixtures', 'tsung', '1', 'tsung.log')).process }
 
   it {
     expect(subject).to be

@@ -3,17 +3,7 @@ require 'Find'
 
 class Crunch
   def self.run
-    all_results = {}
-    p "Looking for tsung.log files under #{Application.results_dir}"
-    Find.find(Application.results_dir) { |path|
-      if File.basename(path) == 'tsung.log'
-        parent_name = File.basename(File.dirname(path))
-        file = LoadTests::File.new path
-        file_data = file.process
-        all_results[parent_name] = file_data if file_data.present? && file_data.keys.length
-      end
-    }
-
+    all_results = LoadTests::AllResults.new.get
     p "All results before JSON conversion: #{all_results}"
 
     json = {
