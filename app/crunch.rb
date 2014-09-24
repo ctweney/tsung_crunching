@@ -1,5 +1,5 @@
 require 'application.rb'
-require 'Find'
+require 'find.rb'
 
 class Crunch
   def self.run
