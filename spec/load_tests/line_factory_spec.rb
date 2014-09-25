@@ -44,4 +44,12 @@ describe LoadTests::LineFactory do
       expect(subject.to_hash[:highest_10sec_mean]).to eq 113181.9
     }
   end
+
+  context 'a 5xx line' do
+    let(:log_line) { 'stats: 502 15 858' }
+    it {
+      expect(subject).to be_instance_of LoadTests::Line::Error5xxLine
+      expect(subject.to_hash[:count]).to eq 15
+    }
+  end
 end

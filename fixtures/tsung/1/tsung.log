@@ -2961,6 +2961,8 @@ stats: {cpu,"ets-calcentral-dev-03.ist.berkeley.edu"} 1 1.8000000000465661 0.0 2
 stats: {load,"ets-calcentral-dev-03.ist.berkeley.edu"} 1 1.7e3 0.0 84400 800 10503.0 100
 stats: {freemem,"ets-calcentral-dev-03.ist.berkeley.edu"} 1 3866.26 0.0 4199.328 3852.076 3939.58576 100
 stats: session 1 113181.93603515625 0.0 167725.68798828125 52.880859375 95596.69053588448 869
+stats: 404 5 858
+stats: 502 15 858
 stats: users_count 0 870
 stats: finish_users_count 1 870
 stats: request 1 52.820068359375 0.0 70205.53491210938 42.6748046875 306.3723223570311 36047

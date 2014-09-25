@@ -3,7 +3,7 @@ module LoadTests
 
     require 'elif'
 
-    TOTAL_NUMBER_OF_COUNTERS = 3
+    TOTAL_NUMBER_OF_COUNTERS = 4
 
     def initialize(filename)
       @filename = filename

@@ -12,6 +12,8 @@ module LoadTests
           LoadTests::Line::MemoryLine.new raw_data
         when /^session/
           LoadTests::Line::SessionLine.new raw_data
+        when /^5\d\d/
+          LoadTests::Line::Error5xxLine.new raw_data
         else
           nil
       end
