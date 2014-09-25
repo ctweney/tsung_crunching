@@ -35,4 +35,13 @@ describe LoadTests::LineFactory do
       expect(subject.to_hash[:lowest]).to eq 3852.1
     }
   end
+
+  context 'a session line' do
+    let(:log_line) { 'stats: session 1 113181.93603515625 0.0 167725.68798828125 52.880859375 95596.69053588448 869' }
+    it {
+      expect(subject).to be_instance_of LoadTests::SessionLine
+      expect(subject.to_hash[:mean]).to eq 95596.7
+      expect(subject.to_hash[:highest_10sec_mean]).to eq 113181.9
+    }
+  end
 end

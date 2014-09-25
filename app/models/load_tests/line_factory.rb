@@ -6,10 +6,12 @@ module LoadTests
       label = raw_data[1]
 
       case label
-        when /\{cpu/
+        when /^\{cpu/
           LoadTests::CpuLine.new raw_data
-        when /\{freemem/
+        when /^\{freemem/
           LoadTests::MemoryLine.new raw_data
+        when /^session/
+          LoadTests::SessionLine.new raw_data
         else
           nil
       end
