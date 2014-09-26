@@ -1,8 +1,9 @@
 module LoadTests
   module Stat
     class Error5xx < AbstractStat
+
       def name
-        :error5xx
+        data[1].to_s.to_sym
       end
 
       def to_hash

@@ -17,7 +17,7 @@ describe LoadTests::GoogleChartsJsonConverter do
     expect(subject[:session_mean][0][1]).to eq 95596.7
     expect(subject[:session_mean][0][3]).to eq 113181.9
     expect(subject[:error_count][0][0]).to eq 1411394598
-    expect(subject[:error_count][0][1]).to eq 15
+    expect(subject[:error_count][0][1]).to eq 37
   }
 
 end

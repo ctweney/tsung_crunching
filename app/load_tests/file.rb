@@ -11,6 +11,7 @@ module LoadTests
       lines << find_last_occurrence('{freemem', LoadTests::Stat::Memory)
       lines << find_last_occurrence('session', LoadTests::Stat::Session, true)
       lines << find_last_occurrence('stats: 5\d\d', LoadTests::Stat::Error5xx)
+      lines << find_5xx_errors
 
       results = {
         run_date: find_date.to_i
@@ -19,6 +20,19 @@ module LoadTests
         results[line.name] = line.to_hash if line
       end
       results
+    end
+
+    def find_5xx_errors
+      errors = []
+      errors << find_last_occurrence('stats: 500', LoadTests::Stat::Error5xx)
+      errors << find_last_occurrence('stats: 502', LoadTests::Stat::Error5xx)
+      errors << find_last_occurrence('stats: 503', LoadTests::Stat::Error5xx)
+
+      composite_errors = ['stats', 'error5xx', 0]
+      errors.each do |error|
+        composite_errors[2] += error.to_hash[:count] if error.present?
+      end
+      LoadTests::Stat::Error5xx.new composite_errors
     end
 
     def find_date
