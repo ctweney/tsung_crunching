@@ -7,23 +7,47 @@
     google.setOnLoadCallback(drawAllCharts);
 
     function drawAllCharts() {
+      drawErrors();
       drawCPU();
       drawMemory();
+      drawSession();
     }
 
+    function drawErrors() {
+
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Run Date');
+      data.addColumn('number', 'Error Count');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['error_count']));
+
+      var options = {
+        title: 'Test run vs. Error Count',
+        hAxis: {title: 'Run'},
+        vAxis: {title: 'Error Count'},
+        curveType: 'function',
+        legend: { position: 'bottom' }
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('error_chart_div'));
+
+      chart.draw(data, options);
+    }
     function drawCPU() {
 
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Run #');
+      data.addColumn('datetime', 'Run Date');
       data.addColumn('number', 'CPU %');
-      data.addColumn({type:'string', role:'tooltip'});
-      data.addRows(tsung_test_data['highest_cpu']);
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['highest_cpu']));
 
       var options = {
         title: 'Test run vs. Highest CPU',
-        hAxis: {title: 'Test Run'},
-        vAxis: {title: 'Highest CPU %'},
-        legend: 'none'
+        hAxis: {title: 'Run'},
+        vAxis: {title: 'CPU %'},
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        trendlines: { 0: {} }
       };
 
       var chart = new google.visualization.ScatterChart(document.getElementById('cpu_chart_div'));
@@ -31,32 +55,72 @@
       chart.draw(data, options);
     }
 
-
     function drawMemory() {
       var data = new google.visualization.DataTable();
-      data.addColumn('number', 'Run #');
+      data.addColumn('datetime', 'Run Date');
       data.addColumn('number', 'Lowest Available Memory (MB)');
-      data.addColumn({type:'string', role:'tooltip'});
-      data.addRows(tsung_test_data['lowest_memory']);
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['lowest_memory']));
 
       var options = {
         title: 'Test run vs. Lowest Available Memory (MB)',
-        hAxis: {title: 'Test Run'},
-        vAxis: {title: 'Lowest Available Memory (MB)'},
-        legend: 'none'
+        hAxis: {title: 'Run'},
+        vAxis: {title: 'Memory (MB)'},
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        trendlines: { 0: {} }
       };
 
       var chart = new google.visualization.ScatterChart(document.getElementById('memory_chart_div'));
 
       chart.draw(data, options);
     }
+
+
+    function drawSession() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Run Date');
+      data.addColumn('number', 'Session Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addColumn('number', 'Highest 10-Second Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['session_mean']));
+
+      var options = {
+        title: 'Test run vs. Overall Session Mean and Highest 10-Second Mean',
+        hAxis: {title: 'Run'},
+        vAxis: {title: 'Time (ms)'},
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        trendlines: { 0: {}, 1: {} }
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('session_chart_div'));
+
+      chart.draw(data, options);
+    }
+
+    function convertDateTimes(data) {
+      for (var i in data) {
+        var date = new Date(0);
+        var epoch = data[i][0];
+        date.setUTCSeconds(epoch);
+        data[i][0] = date;
+      }
+      return data;
+    }
+
   </script>
 </head>
 <body>
 
-<div id="cpu_chart_div" style="width: 900px; height: 500px;"></div>
+<div id="error_chart_div" style="width: 600px; height: 400px; display:inline-block"></div>
 
-<div id="memory_chart_div" style="width: 900px; height: 500px;"></div>
+<div id="cpu_chart_div" style="width: 600px; height: 400px; display:inline-block"></div>
+
+<div id="memory_chart_div" style="width: 600px; height: 400px; display:inline-block"></div>
+
+<div id="session_chart_div" style="width: 600px; height: 400px; display:inline-block"></div>
 
 </body>
 </html>

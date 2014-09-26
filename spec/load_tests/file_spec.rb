@@ -6,6 +6,7 @@ describe LoadTests::File do
 
   it {
     expect(subject).to be
+    expect(subject[:run_date]).to eq 1411394598
     expect(subject[:cpu][:highest]).to eq 252.2
     expect(subject[:cpu][:lowest]).to eq 1.8
     expect(subject[:memory][:highest]).to eq 4199.3
