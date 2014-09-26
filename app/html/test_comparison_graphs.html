@@ -11,6 +11,8 @@
       drawCPU();
       drawMemory();
       drawSession();
+      drawAcademics();
+      drawAPIEndpoints();
     }
 
     function drawErrors() {
@@ -102,6 +104,52 @@
       chart.draw(data, options);
     }
 
+    function drawAcademics() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Run Date');
+      data.addColumn('number', 'Academics Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addColumn('number', 'Highest 10-Second Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['tr_academics_mean']));
+
+      var options = {
+        title: 'Academics Mean and Highest 10-Second Mean',
+        hAxis: {title: 'Run Date'},
+        vAxis: {title: 'Time (ms)'},
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        trendlines: { 0: {}, 1: {} }
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('academics_chart_div'));
+
+      chart.draw(data, options);
+    }
+
+    function drawAPIEndpoints() {
+      var data = new google.visualization.DataTable();
+      data.addColumn('datetime', 'Run Date');
+      data.addColumn('number', 'API Endpoints Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addColumn('number', 'Highest 10-Second Mean (ms)');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addRows(convertDateTimes(tsung_test_data['tr_api_endpoints_mean']));
+
+      var options = {
+        title: 'API Endpoints Mean and Highest 10-Second Mean',
+        hAxis: {title: 'Run Date'},
+        vAxis: {title: 'Time (ms)'},
+        curveType: 'function',
+        legend: { position: 'bottom' },
+        trendlines: { 0: {}, 1: {} }
+      };
+
+      var chart = new google.visualization.ScatterChart(document.getElementById('api_endpoints_chart_div'));
+
+      chart.draw(data, options);
+    }
+
     function convertDateTimes(data) {
       for (var i in data) {
         var date = new Date(0);
@@ -123,6 +171,10 @@
 <div id="session_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 <div id="memory_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+
+<div id="academics_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+
+<div id="api_endpoints_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 </body>
 </html>

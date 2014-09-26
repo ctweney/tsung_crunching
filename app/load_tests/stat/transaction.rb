@@ -1,9 +1,9 @@
 module LoadTests
   module Stat
-    class Session < AbstractStat
+    class Transaction < AbstractStat
 
       def name
-        :session
+        data[1].to_s.to_sym
       end
 
       def to_hash
