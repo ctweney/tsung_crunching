@@ -12,6 +12,7 @@ describe LoadTests::File do
     expect(subject[:memory][:highest]).to eq 4199.3
     expect(subject[:memory][:lowest]).to eq 3852.1
     expect(subject[:session][:mean]).to eq 95596.7
+    expect(subject[:session][:highest_10sec_mean]).to eq 113181.9
     expect(subject[:error5xx][:count]).to eq 15
   }
 end
