@@ -1,6 +1,6 @@
 module LoadTests
-  module Line
-    class SessionLine < AbstractLine
+  module Stat
+    class Session < AbstractStat
 
       def name
         :session

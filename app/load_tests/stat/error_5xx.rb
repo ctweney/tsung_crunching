@@ -1,6 +1,6 @@
 module LoadTests
-  module Line
-    class Error5xxLine < AbstractLine
+  module Stat
+    class Error5xx < AbstractStat
       def name
         :error5xx
       end

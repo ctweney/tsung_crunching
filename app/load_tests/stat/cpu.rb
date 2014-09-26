@@ -1,6 +1,6 @@
 module LoadTests
-  module Line
-    class CpuLine < AbstractLine
+  module Stat
+    class Cpu < AbstractStat
       def name
         :cpu
       end

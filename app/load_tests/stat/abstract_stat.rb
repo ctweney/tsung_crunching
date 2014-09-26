@@ -1,6 +1,6 @@
 module LoadTests
-  module Line
-    class AbstractLine
+  module Stat
+    class AbstractStat
       attr_reader :data
 
       def initialize(data, highest_10sec_mean=0)
@@ -9,7 +9,7 @@ module LoadTests
       end
 
       def name
-        :line
+        :stat
       end
 
       def to_hash

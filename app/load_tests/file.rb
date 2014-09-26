@@ -7,10 +7,10 @@ module LoadTests
 
     def process
       lines = []
-      lines << find_last_occurrence('{cpu', LoadTests::Line::CpuLine)
-      lines << find_last_occurrence('{freemem', LoadTests::Line::MemoryLine)
-      lines << find_last_occurrence('session', LoadTests::Line::SessionLine, true)
-      lines << find_last_occurrence('stats: 5\d\d', LoadTests::Line::Error5xxLine)
+      lines << find_last_occurrence('{cpu', LoadTests::Stat::Cpu)
+      lines << find_last_occurrence('{freemem', LoadTests::Stat::Memory)
+      lines << find_last_occurrence('session', LoadTests::Stat::Session, true)
+      lines << find_last_occurrence('stats: 5\d\d', LoadTests::Stat::Error5xx)
 
       results = {
         run_date: find_date.to_i

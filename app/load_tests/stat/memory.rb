@@ -1,6 +1,6 @@
 module LoadTests
-  module Line
-    class MemoryLine < AbstractLine
+  module Stat
+    class Memory < AbstractStat
 
       def name
         :memory
