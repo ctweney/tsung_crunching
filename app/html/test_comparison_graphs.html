@@ -22,8 +22,8 @@
       data.addRows(convertDateTimes(tsung_test_data['error_count']));
 
       var options = {
-        title: 'Test run vs. Error Count',
-        hAxis: {title: 'Run'},
+        title: 'Error Count',
+        hAxis: {title: 'Run Date'},
         vAxis: {title: 'Error Count'},
         curveType: 'function',
         legend: { position: 'bottom' }
@@ -42,8 +42,8 @@
       data.addRows(convertDateTimes(tsung_test_data['highest_cpu']));
 
       var options = {
-        title: 'Test run vs. Highest CPU',
-        hAxis: {title: 'Run'},
+        title: 'CPU %',
+        hAxis: {title: 'Run Date'},
         vAxis: {title: 'CPU %'},
         curveType: 'function',
         legend: { position: 'bottom' },
@@ -63,8 +63,8 @@
       data.addRows(convertDateTimes(tsung_test_data['lowest_memory']));
 
       var options = {
-        title: 'Test run vs. Lowest Available Memory (MB)',
-        hAxis: {title: 'Run'},
+        title: 'Lowest Available Memory',
+        hAxis: {title: 'Run Date'},
         vAxis: {title: 'Memory (MB)'},
         curveType: 'function',
         legend: { position: 'bottom' },
@@ -87,8 +87,8 @@
       data.addRows(convertDateTimes(tsung_test_data['session_mean']));
 
       var options = {
-        title: 'Test run vs. Overall Session Mean and Highest 10-Second Mean',
-        hAxis: {title: 'Run'},
+        title: 'Overall Session Mean and Highest 10-Second Mean',
+        hAxis: {title: 'Run Date'},
         vAxis: {title: 'Time (ms)'},
         curveType: 'function',
         legend: { position: 'bottom' },
