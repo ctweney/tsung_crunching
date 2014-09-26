@@ -17,14 +17,16 @@
 
       var data = new google.visualization.DataTable();
       data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'Error Count');
+      data.addColumn('number', '5xx Error Count');
+      data.addColumn({type: 'string', role: 'tooltip'});
+      data.addColumn('number', '4xx Error Count');
       data.addColumn({type: 'string', role: 'tooltip'});
       data.addRows(convertDateTimes(tsung_test_data['error_count']));
 
       var options = {
         title: 'Error Count',
         hAxis: {title: 'Run Date'},
-        vAxis: {title: 'Error Count'},
+        vAxis: {title: 'Count'},
         curveType: 'function',
         legend: { position: 'bottom' }
       };

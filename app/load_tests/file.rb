@@ -10,8 +10,8 @@ module LoadTests
       lines << find_last_occurrence('{cpu', LoadTests::Stat::Cpu)
       lines << find_last_occurrence('{freemem', LoadTests::Stat::Memory)
       lines << find_last_occurrence('session', LoadTests::Stat::Session, true)
-      lines << find_last_occurrence('stats: 5\d\d', LoadTests::Stat::Error5xx)
       lines << summarize_errors('error5xx', [500, 502, 503])
+      lines << summarize_errors('error4xx', [400, 401, 403, 404])
 
       results = {
         run_date: find_date.to_i
@@ -25,10 +25,10 @@ module LoadTests
     def summarize_errors(label, codes)
       composite_errors = ['stats', label, 0]
       codes.each do |code|
-        error = find_last_occurrence("stats: #{code}", LoadTests::Stat::Error5xx)
+        error = find_last_occurrence("stats: #{code}", LoadTests::Stat::Error)
         composite_errors[2] += error.to_hash[:count] if error.present?
       end
-      LoadTests::Stat::Error5xx.new composite_errors
+      LoadTests::Stat::Error.new composite_errors
     end
 
     def find_date

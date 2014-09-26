@@ -12,26 +12,20 @@ module LoadTests
         error_count: []
       }
 
-      count = 0
       @results.keys.sort.each do |key|
         if @results[key][:cpu].present?
-          count += 1
           json[:highest_cpu] << [@results[key][:run_date], @results[key][:cpu][:highest], "#{key}: #{@results[key][:cpu][:highest]}%"]
         end
       end
 
-      count = 0
       @results.keys.sort.each do |key|
         if @results[key][:memory].present?
-          count += 1
           json[:lowest_memory] << [@results[key][:run_date], @results[key][:memory][:lowest], "#{key}: #{@results[key][:memory][:lowest]}MB"]
         end
       end
 
-      count = 0
       @results.keys.sort.each do |key|
         if @results[key][:session].present?
-          count += 1
           json[:session_mean] << [
             @results[key][:run_date],
             @results[key][:session][:mean], "#{key}: #{@results[key][:session][:mean]}ms",
@@ -40,15 +34,24 @@ module LoadTests
         end
       end
 
-      count = 0
       @results.keys.sort.each do |key|
+        errs = [@results[key][:run_date]]
         if @results[key][:error5xx].present?
-          count += 1
-          json[:error_count] << [
-            @results[key][:run_date],
-            @results[key][:error5xx][:count], "#{key}: #{@results[key][:error5xx][:count]} errors"
-          ]
+          errs << @results[key][:error5xx][:count]
+          errs << "#{key}: #{@results[key][:error5xx][:count]} 500-series errors"
+        else
+          errs << 0
+          errs << 0
         end
+
+        if @results[key][:error4xx].present?
+          errs << @results[key][:error4xx][:count]
+          errs << "#{key}: #{@results[key][:error4xx][:count]} 400-series errors"
+        else
+          errs << 0
+          errs << 0
+        end
+        json[:error_count] << errs
       end
 
       json
