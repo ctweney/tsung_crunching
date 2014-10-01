@@ -9,9 +9,12 @@ module LoadTests
         highest_cpu: [],
         lowest_memory: [],
         session_mean: [],
+        session_highest_10sec_mean: [],
         error_count: [],
         tr_academics_mean: [],
-        tr_api_endpoints_mean: []
+        tr_academics_highest_10sec_mean: [],
+        tr_api_endpoints_mean: [],
+        tr_api_endpoints_highest_10sec_mean: []
       }
 
       @results.keys.sort.each do |key|
@@ -30,7 +33,15 @@ module LoadTests
         if @results[key][:session].present?
           json[:session_mean] << [
             @results[key][:run_date],
-            @results[key][:session][:mean], "#{key}: #{@results[key][:session][:mean]}ms",
+            @results[key][:session][:mean], "#{key}: #{@results[key][:session][:mean]}ms"
+          ]
+        end
+      end
+
+      @results.keys.sort.each do |key|
+        if @results[key][:session].present?
+          json[:session_highest_10sec_mean] << [
+            @results[key][:run_date],
             @results[key][:session][:highest_10sec_mean], "#{key}: #{@results[key][:session][:highest_10sec_mean]}ms"
           ]
         end
@@ -60,7 +71,15 @@ module LoadTests
         if @results[key][:tr_academics].present?
           json[:tr_academics_mean] << [
             @results[key][:run_date],
-            @results[key][:tr_academics][:mean], "#{key}: #{@results[key][:tr_academics][:mean]}ms",
+            @results[key][:tr_academics][:mean], "#{key}: #{@results[key][:tr_academics][:mean]}ms"
+          ]
+        end
+      end
+
+      @results.keys.sort.each do |key|
+        if @results[key][:tr_academics].present?
+          json[:tr_academics_highest_10sec_mean] << [
+            @results[key][:run_date],
             @results[key][:tr_academics][:highest_10sec_mean], "#{key}: #{@results[key][:tr_academics][:highest_10sec_mean]}ms"
           ]
         end
@@ -70,7 +89,15 @@ module LoadTests
         if @results[key][:tr_api_endpoints].present?
           json[:tr_api_endpoints_mean] << [
             @results[key][:run_date],
-            @results[key][:tr_api_endpoints][:mean], "#{key}: #{@results[key][:tr_api_endpoints][:mean]}ms",
+            @results[key][:tr_api_endpoints][:mean], "#{key}: #{@results[key][:tr_api_endpoints][:mean]}ms"
+          ]
+        end
+      end
+
+      @results.keys.sort.each do |key|
+        if @results[key][:tr_api_endpoints].present?
+          json[:tr_api_endpoints_highest_10sec_mean] << [
+            @results[key][:run_date],
             @results[key][:tr_api_endpoints][:highest_10sec_mean], "#{key}: #{@results[key][:tr_api_endpoints][:highest_10sec_mean]}ms"
           ]
         end

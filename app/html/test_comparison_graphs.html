@@ -8,11 +8,14 @@
 
     function drawAllCharts() {
       drawErrors();
-      drawCPU();
-      drawMemory();
-      drawSession();
-      drawAcademics();
-      drawAPIEndpoints();
+      drawGeneric(convertDateTimes(tsung_test_data['highest_cpu']), 'Date', 'CPU %', 'CPU %', 'cpu_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['lowest_memory']), 'Date', 'Lowest Available Memory (MB)', 'Lowest Available Memory', 'memory_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['session_mean']), 'Date', 'Time (ms)', 'Overall Session Mean', 'session_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['session_highest_10sec_mean']), 'Date', 'Time (ms)', 'Session Highest 10-sec Mean', 'session_highest_10sec_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['tr_academics_mean']), 'Date', 'Time (ms)', 'tr_academics Mean', 'academics_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['tr_academics_highest_10sec_mean']), 'Date', 'Time (ms)', 'tr_academics Highest 10-sec Mean', 'academics_highest_10sec_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['tr_api_endpoints_mean']), 'Date', 'Time (ms)', 'tr_api_endpoints Mean', 'api_endpoints_chart_div');
+      drawGeneric(convertDateTimes(tsung_test_data['tr_api_endpoints_highest_10sec_mean']), 'Date', 'Time (ms)', 'tr_api_endpoints Highest 10-sec Mean', 'api_endpoints_highest_10sec_chart_div');
     }
 
     function drawErrors() {
@@ -37,116 +40,22 @@
 
       chart.draw(data, options);
     }
-    function drawCPU() {
 
+    function drawGeneric(input_data, x_axis, y_axis, title, div) {
       var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'CPU %');
+      data.addColumn('datetime', x_axis);
+      data.addColumn('number', y_axis);
       data.addColumn({type: 'string', role: 'tooltip'});
-      data.addRows(convertDateTimes(tsung_test_data['highest_cpu']));
-
+      data.addRows(input_data);
       var options = {
-        title: 'CPU %',
-        hAxis: {title: 'Run Date'},
-        vAxis: {title: 'CPU %'},
-        curveType: 'function',
-        legend: { position: 'bottom' },
-        trendlines: { 0: {} }
-      };
-
-      var chart = new google.visualization.ScatterChart(document.getElementById('cpu_chart_div'));
-
-      chart.draw(data, options);
-    }
-
-    function drawMemory() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'Lowest Available Memory (MB)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addRows(convertDateTimes(tsung_test_data['lowest_memory']));
-
-      var options = {
-        title: 'Lowest Available Memory',
-        hAxis: {title: 'Run Date'},
-        vAxis: {title: 'Memory (MB)'},
-        curveType: 'function',
-        legend: { position: 'bottom' },
-        trendlines: { 0: {} }
-      };
-
-      var chart = new google.visualization.ScatterChart(document.getElementById('memory_chart_div'));
-
-      chart.draw(data, options);
-    }
-
-
-    function drawSession() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'Session Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addColumn('number', 'Highest 10-Second Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addRows(convertDateTimes(tsung_test_data['session_mean']));
-
-      var options = {
-        title: 'Overall Session Mean and Highest 10-Second Mean',
-        hAxis: {title: 'Run Date'},
-        vAxis: {title: 'Time (ms)'},
+        title: title,
+        hAxis: {title: x_axis},
+        vAxis: {title: y_axis},
         curveType: 'function',
         legend: { position: 'bottom' },
         trendlines: { 0: {}, 1: {} }
       };
-
-      var chart = new google.visualization.ScatterChart(document.getElementById('session_chart_div'));
-
-      chart.draw(data, options);
-    }
-
-    function drawAcademics() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'Academics Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addColumn('number', 'Highest 10-Second Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addRows(convertDateTimes(tsung_test_data['tr_academics_mean']));
-
-      var options = {
-        title: 'Academics Mean and Highest 10-Second Mean',
-        hAxis: {title: 'Run Date'},
-        vAxis: {title: 'Time (ms)'},
-        curveType: 'function',
-        legend: { position: 'bottom' },
-        trendlines: { 0: {}, 1: {} }
-      };
-
-      var chart = new google.visualization.ScatterChart(document.getElementById('academics_chart_div'));
-
-      chart.draw(data, options);
-    }
-
-    function drawAPIEndpoints() {
-      var data = new google.visualization.DataTable();
-      data.addColumn('datetime', 'Run Date');
-      data.addColumn('number', 'API Endpoints Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addColumn('number', 'Highest 10-Second Mean (ms)');
-      data.addColumn({type: 'string', role: 'tooltip'});
-      data.addRows(convertDateTimes(tsung_test_data['tr_api_endpoints_mean']));
-
-      var options = {
-        title: 'API Endpoints Mean and Highest 10-Second Mean',
-        hAxis: {title: 'Run Date'},
-        vAxis: {title: 'Time (ms)'},
-        curveType: 'function',
-        legend: { position: 'bottom' },
-        trendlines: { 0: {}, 1: {} }
-      };
-
-      var chart = new google.visualization.ScatterChart(document.getElementById('api_endpoints_chart_div'));
-
+      var chart = new google.visualization.ScatterChart(document.getElementById(div));
       chart.draw(data, options);
     }
 
@@ -168,13 +77,19 @@
 
 <div id="cpu_chart_div" style="width: 800px; height: 400px; display:inline-block"></div>
 
+<div id="memory_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+
 <div id="session_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
-<div id="memory_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+<div id="session_highest_10sec_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 <div id="academics_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
+<div id="academics_highest_10sec_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+
 <div id="api_endpoints_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
+
+<div id="api_endpoints_highest_10sec_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 </body>
 </html>
