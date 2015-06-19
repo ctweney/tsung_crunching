@@ -18,9 +18,6 @@ describe LoadTests::GoogleChartsJsonConverter do
     expect(subject[:session_highest_10sec_mean][0][1]).to eq 113181.9
     expect(subject[:error_count][0][0]).to eq 1411394598
     expect(subject[:error_count][0][1]).to eq 37
-    expect(subject[:tr_academics_mean][0][0]).to eq 1411394598
-    expect(subject[:tr_academics_mean][0][1]).to eq 115.5
-    expect(subject[:tr_academics_highest_10sec_mean][0][1]).to eq 389.4
     expect(subject[:tr_api_endpoints_mean][0][0]).to eq 1411394598
     expect(subject[:tr_api_endpoints_mean][0][1]).to eq 9800.3
     expect(subject[:tr_api_endpoints_highest_10sec_mean][0][1]).to eq 29273.6

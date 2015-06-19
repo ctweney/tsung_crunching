@@ -11,8 +11,6 @@ module LoadTests
         session_mean: [],
         session_highest_10sec_mean: [],
         error_count: [],
-        tr_academics_mean: [],
-        tr_academics_highest_10sec_mean: [],
         tr_api_endpoints_mean: [],
         tr_api_endpoints_highest_10sec_mean: []
       }
@@ -65,24 +63,6 @@ module LoadTests
           errs << 0
         end
         json[:error_count] << errs
-      end
-
-      @results.keys.sort.each do |key|
-        if @results[key][:tr_academics].present?
-          json[:tr_academics_mean] << [
-            @results[key][:run_date],
-            @results[key][:tr_academics][:mean], "#{key}: #{@results[key][:tr_academics][:mean]}ms"
-          ]
-        end
-      end
-
-      @results.keys.sort.each do |key|
-        if @results[key][:tr_academics].present?
-          json[:tr_academics_highest_10sec_mean] << [
-            @results[key][:run_date],
-            @results[key][:tr_academics][:highest_10sec_mean], "#{key}: #{@results[key][:tr_academics][:highest_10sec_mean]}ms"
-          ]
-        end
       end
 
       @results.keys.sort.each do |key|

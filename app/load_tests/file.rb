@@ -10,7 +10,6 @@ module LoadTests
       lines << find_last_occurrence('{cpu', LoadTests::Stat::Cpu)
       lines << find_last_occurrence('{freemem', LoadTests::Stat::Memory)
       lines << find_last_occurrence('session', LoadTests::Stat::Transaction, true)
-      lines << find_last_occurrence('tr_academics', LoadTests::Stat::Transaction, true)
       lines << find_last_occurrence('tr_api_endpoints', LoadTests::Stat::Transaction, true)
       lines << summarize_errors('error5xx', [500, 502, 503])
       lines << summarize_errors('error4xx', [400, 401, 403, 404])

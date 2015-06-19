@@ -12,8 +12,6 @@
       drawGeneric(convertDateTimes(tsung_test_data['lowest_memory']), 'Date', 'Lowest Available Memory (MB)', 'Lowest Available Memory', 'memory_chart_div');
       drawGeneric(convertDateTimes(tsung_test_data['session_mean']), 'Date', 'Time (ms)', 'Overall Session Mean', 'session_chart_div');
       drawGeneric(convertDateTimes(tsung_test_data['session_highest_10sec_mean']), 'Date', 'Time (ms)', 'Session Highest 10-sec Mean', 'session_highest_10sec_chart_div');
-      drawGeneric(convertDateTimes(tsung_test_data['tr_academics_mean']), 'Date', 'Time (ms)', 'tr_academics Mean', 'academics_chart_div');
-      drawGeneric(convertDateTimes(tsung_test_data['tr_academics_highest_10sec_mean']), 'Date', 'Time (ms)', 'tr_academics Highest 10-sec Mean', 'academics_highest_10sec_chart_div');
       drawGeneric(convertDateTimes(tsung_test_data['tr_api_endpoints_mean']), 'Date', 'Time (ms)', 'tr_api_endpoints Mean', 'api_endpoints_chart_div');
       drawGeneric(convertDateTimes(tsung_test_data['tr_api_endpoints_highest_10sec_mean']), 'Date', 'Time (ms)', 'tr_api_endpoints Highest 10-sec Mean', 'api_endpoints_highest_10sec_chart_div');
     }
@@ -82,10 +80,6 @@
 <div id="session_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 <div id="session_highest_10sec_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
-
-<div id="academics_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
-
-<div id="academics_highest_10sec_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
 <div id="api_endpoints_chart_div" style="width: 1200px; height: 400px; display:inline-block"></div>
 
